@@ -58,7 +58,7 @@ export const Login = () => {
                                     value={data.password}
                                     onChange={handleOnChange}
                                     onFocus={() => setShowEyeIcon('')}
-                                    onBlur={() => setShowEyeIcon('hidden')} type={showPassword ? 'text' : 'password'} className='w-full outline-none p-2' placeholder='password' />
+                                    onBlur={() => setShowEyeIcon('hidden')} type={showPassword ? 'text' : 'password'} className='w-full outline-none p-2' placeholder='Password' />
                                 <div className={`p-2 cursor-pointer ${showEyeIcon}`} onMouseDown={handleMouseDown}>
                                     <span className='text-gray-500'>
                                         {showPassword ? <FaEyeSlash /> : <FaEye />}
