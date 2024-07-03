@@ -2,7 +2,9 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <footer className='flex justify-center'>
+      <h1>QUICKCART</h1>
+    </footer>
   )
 }
 
