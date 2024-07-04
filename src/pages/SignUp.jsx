@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import makeRequest from '../axios';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -9,6 +11,8 @@ const SignUp = () => {
 
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [showConfirmEyeIcon, setShowConfirmEyeIcon] = useState('hidden');
+
+    const navigate = useNavigate();
 
     // Data from inputbox
     const [data, setData] = useState({
@@ -28,10 +32,20 @@ const SignUp = () => {
             }
         })
     }
-    console.log(data);
 
-    const handleSubmit = (e) => {
+    // Handle submit send data to the server
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const res = await makeRequest.post('/registration',data);
+            console.log(res.data.message);
+            toast.success(res.data.message);
+            navigate('/login');
+
+        } catch (error) {
+            console.error(error.response.data.message || 'Error during registration');
+            toast.error(error.response.data.message || 'Error during registration');
+        }
     }
 
     // Eye icon toggle fuction for password visibility
