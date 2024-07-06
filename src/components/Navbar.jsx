@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../context';
 import makeRequest from '../axios';
 import { toast } from 'react-toastify';
+import ROLE from '../common/role';
 
 const Navbar = () => {
     
@@ -68,9 +69,11 @@ const Navbar = () => {
                         <div>
                         <CiUser />
                         </div>
-                        {showMyProfile && <div className='absolute top-9 -left-8 w-24 text-center p-2 text-sm cursor-pointer bg-white hover:bg-gray-100 shadow-md'>
-                            My profile
-                        </div>}
+                        {showMyProfile && <div className='absolute top-9 -left-8 w-28 text-sm bg-white shadow-md'>
+                            <div className='hover:bg-gray-100 px-3 py-2'>My profile</div>
+                            {userDetails?.role === ROLE.ADMIN && <Link to={'/admin'}><div className='hover:bg-gray-100 px-3 py-2 md:block hidden'>Admin Panel</div></Link>}
+                        </div>
+                        }
                     </div>
                     <div>
                         {   userDetails ?
