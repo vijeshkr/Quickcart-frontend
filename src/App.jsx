@@ -3,18 +3,22 @@ import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { UserProvider } from "./context";
 
 
 function App() {
 
+
   return (
     <>
-     <ToastContainer />
-      <Navbar />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
+        <UserProvider>
+        <ToastContainer />
+        <Navbar />
+        <main>
+          <Outlet />
+        </main>
+        <Footer />
+        </UserProvider>
     </>
   )
 }

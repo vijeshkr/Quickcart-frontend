@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import makeRequest from '../axios';
+import { toast } from 'react-toastify';
+import UserContext from '../context';
 
 export const Login = () => {
 
+    const { fetchUserDetails } = useContext(UserContext);
+
+
     const [showPassword, setShowPassword] = useState(false);
     const [showEyeIcon, setShowEyeIcon] = useState('hidden');
+
+    const navigate = useNavigate();
 
     // Data from inputbox
     const [data, setData] = useState({
@@ -25,8 +33,27 @@ export const Login = () => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const res = await makeRequest.post('/login',data);
+            console.log(res.data.message);
+            toast.success(res.data.message);
+            // Set data in the context
+            await fetchUserDetails();
+            
+            if(res.data.data.role == "ADMIN"){
+                navigate('/admin');
+            }else{
+                navigate('/');
+            }
+            
+
+        } catch (error) {
+            console.error(error.response.data.message || 'Login failed');
+            toast.error(error.response.data.message || 'Login failed');
+            console.log(error)
+        }
     }
 
     // Eye icon toggle fuction for password visibility

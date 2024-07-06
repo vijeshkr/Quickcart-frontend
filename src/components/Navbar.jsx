@@ -1,12 +1,44 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { IoSearchOutline } from "react-icons/io5";
 import { CiUser } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import UserContext from '../context';
+import makeRequest from '../axios';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
+    
+    // Destructure user details from contextApi
+    const { userDetails, setUserDetails } = useContext(UserContext);
+
+    // Show my profile section
+    const [showMyProfile, setShowMyProfile] = useState(false);
+
+    // Toggle function for show my profile
+    const handleToggle = () => {
+        setShowMyProfile(!showMyProfile);
+    }
+
+    const navigate = useNavigate();
+
+    // Logout function
+    const handleLogout = async () => {
+        try {
+            const res = await makeRequest.post('/logout');
+            setUserDetails(null);
+            console.log(res.data.message);
+            toast.success(res.data.message);
+            navigate("/");
+        } catch (error) {
+            // console.error(error.response?.data?.message || 'Logout failed');
+            // toast.error(error.response?.data?.message || 'Logout failed');
+            console.log(error)
+        }
+    }
+
     return (
         <header className='h-16 shadow-md sticky top-0 bg-white'>
             {/* Container div */}
@@ -32,11 +64,21 @@ const Navbar = () => {
                         <span><CiShoppingCart /></span>
                         <div className='text-xs bg-primaryColor text-white p-1 w-5 flex justify-center items-center rounded-full font-semibold absolute -bottom-3 -right-3'>0</div>
                     </div>
-                    <div className='text-2xl cursor-pointer'>
+                    <div onClick={handleToggle} className='text-2xl cursor-pointer relative'>
+                        <div>
                         <CiUser />
+                        </div>
+                        {showMyProfile && <div className='absolute top-9 -left-8 w-24 text-center p-2 text-sm cursor-pointer bg-white hover:bg-gray-100 shadow-md'>
+                            My profile
+                        </div>}
                     </div>
                     <div>
-                        <Link to={'/login'} className='border px-3 py-1 rounded-md text-sm hover:border-primaryColor hover:text-primaryColor'>Login</Link>
+                        {   userDetails ?
+                        <button onClick={handleLogout} className='border px-3 py-1 rounded-md text-sm hover:border-primaryColor hover:text-primaryColor'>Logout</button>
+                        :
+                         <Link to={'/login'} className='border px-3 py-1 rounded-md text-sm hover:border-primaryColor hover:text-primaryColor'>Login</Link>
+                            
+                            }
                     </div>
                 </div>
 
