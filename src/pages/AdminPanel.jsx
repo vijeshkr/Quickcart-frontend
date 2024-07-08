@@ -1,20 +1,32 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import UserContext from '../context';
 import { CiUser } from "react-icons/ci";
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import ROLE from '../common/role';
+import LoadingComponent from '../components/Loading';
 
 export const AdminPanel = () => {
     const { userDetails } = useContext(UserContext);
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
 
     // If user is not admin redirect to the home page
     useEffect(() => {
-        if(userDetails?.role !== ROLE.ADMIN){
-            navigate('/');
+        if (userDetails) {
+            if (userDetails.role !== ROLE.ADMIN) {
+                console.log(userDetails.role);
+                navigate('/');
+            } else {
+                setIsLoading(false); // Role check is complete and user is an admin
+            }
+        } else {
+            setIsLoading(false); // Set loading to false if userDetails is not available
         }
-    });
+    }, [userDetails, navigate]);
 
+    if (isLoading) {
+        return <LoadingComponent />;
+    }
   return (
     <div className='min-h-[calc(100vh-120px)] md:flex hidden'>
         <aside className='bg-rose-50 m-h-full w-full max-w-60 shadow-sm'>
