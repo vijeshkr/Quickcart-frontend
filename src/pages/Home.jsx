@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
 import UserContext from '../context'
+import CategoryList from '../components/CategoryList';
+import Banner from '../components/Banner';
 
 const Home = () => {
-  const { userDetails } = useContext(UserContext);
 
-  console.log(userDetails)
   return (
-    <div>Home
-      {userDetails && userDetails.name}
+    <div>
+      <CategoryList/>
+      <Banner/>
     </div>
   )
 }

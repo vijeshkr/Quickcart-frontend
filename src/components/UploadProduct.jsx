@@ -86,7 +86,7 @@ const UploadProduct = ({
                         id='productName'
                         placeholder='Enter product name'
                         name='productName'
-                        className='p-2 bg-slate-100 border rounded'
+                        className='p-2 bg-slate-100 border rounded outline-none'
                         required
                     />
 
@@ -98,7 +98,7 @@ const UploadProduct = ({
                         id='brandName'
                         placeholder='Enter brand name'
                         name='brandName'
-                        className='p-2 bg-slate-100 border rounded'
+                        className='p-2 bg-slate-100 border rounded outline-none'
                         required
                     />
 
@@ -170,11 +170,11 @@ const UploadProduct = ({
                         id='price'
                         placeholder='Enter price'
                         name='price'
-                        className='p-2 bg-slate-100 border rounded'
+                        className='p-2 bg-slate-100 border rounded outline-none'
                         required
                     />
 
-                    <label htmlFor='sellingPrice' className='mt-3'>Selling Price :</label>
+                    <label htmlFor='sellingPrice' className='mt-3 '>Selling Price :</label>
                     <input
                         value={data.sellingPrice}
                         onChange={handleOnChange}
@@ -182,15 +182,15 @@ const UploadProduct = ({
                         id='sellingPrice'
                         placeholder='Enter selling price'
                         name='sellingPrice'
-                        className='p-2 bg-slate-100 border rounded'
+                        className='p-2 bg-slate-100 border rounded outline-none'
                         required
                     />
 
-                    <label htmlFor='description' className='mt-3'>Description :</label>
+                    <label htmlFor='description' className='mt-3 outline-none'>Description :</label>
                     <textarea
                         value={data.description}
                         onChange={handleOnChange}
-                        className='h-28 bg-slate-100 border resize-none p-1'
+                        className='h-28 bg-slate-100 border resize-none p-1 outline-none'
                         placeholder='Enter product description'
                         rows={3}
                         name='description'

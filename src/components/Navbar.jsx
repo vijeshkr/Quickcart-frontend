@@ -41,7 +41,7 @@ const Navbar = () => {
     }
 
     return (
-        <header className='h-16 shadow-md sticky top-0 bg-white'>
+        <header className='h-16 shadow-md sticky top-0 bg-white z-10'>
             {/* Container div */}
             <div className='h-full container mx-auto flex items-center px-4 justify-between'>
                 <Link to={'/'}><h1 className='font-bold text-2xl text-primaryColor cursor-pointer'>QUICKCART</h1></Link>

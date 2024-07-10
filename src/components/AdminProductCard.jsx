@@ -14,7 +14,7 @@ const AdminProductCard = ({
     <div className='bg-slate-50 p-2 rounded '>
       <div className='w-40'>
         <div className='h-32 flex justify-center items-center'>
-          <img className='object-cover' src={`http://localhost:3500${data?.productImage[0]}`} className='mx-auto object-fill h-full' />
+          <img src={`http://localhost:3500${data?.productImage[0]}`} className='mx-auto object-cover h-full' />
         </div>
         <h1 className='text-ellipsis line-clamp-2'>{data.productName}</h1>
 
