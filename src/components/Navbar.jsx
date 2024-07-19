@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { IoSearchOutline } from "react-icons/io5";
 import { CiUser } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
@@ -13,7 +13,11 @@ import ROLE from '../common/role';
 const Navbar = () => {
 
     // Destructure user details from contextApi
-    const { userDetails, setUserDetails, cartProductCount } = useContext(UserContext);
+    const { userDetails, setUserDetails, cartProductCount, fetchAddToCart } = useContext(UserContext);
+
+    useEffect(() => {
+        fetchAddToCart(); // Fetch cart count on mount
+    }, [fetchAddToCart])
 
     // Show my profile section
     const [showMyProfile, setShowMyProfile] = useState(false);
@@ -97,7 +101,7 @@ const Navbar = () => {
                         <Link to={'/cart'}>
                             <span><CiShoppingCart /></span>
                             {
-                              cartProductCount > 0 &&
+                              cartProductCount > 0 && userDetails &&
                               <div className='text-xs bg-primaryColor text-white p-1 w-5 flex justify-center items-center rounded-full font-semibold absolute -bottom-3 -right-3'>{cartProductCount}</div>
                             }
                         </Link>
