@@ -38,7 +38,6 @@ const SignUp = () => {
         e.preventDefault();
         try {
             const res = await makeRequest.post('/registration',data);
-            console.log(res.data.message);
             toast.success(res.data.message);
             navigate('/login');
 

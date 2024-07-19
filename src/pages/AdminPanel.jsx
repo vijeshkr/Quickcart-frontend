@@ -14,7 +14,6 @@ export const AdminPanel = () => {
     useEffect(() => {
         if (userDetails) {
             if (userDetails.role !== ROLE.ADMIN) {
-                console.log(userDetails.role);
                 navigate('/');
             } else {
                 setIsLoading(false); // Role check is complete and user is an admin

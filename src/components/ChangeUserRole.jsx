@@ -28,7 +28,6 @@ const ChangeUserRole = ({
                 role : userRole
             });
 
-            console.log(res.data.message);
             toast.success(res.data.message);
             onClose();
             callAllUsers();
@@ -36,7 +35,6 @@ const ChangeUserRole = ({
         } catch (error) {
             console.error(error.response?.data?.message || 'Failed to update role');
             toast.error(error.response?.data?.message || 'Failed to update role');
-            console.log(error);
         }
     }
 

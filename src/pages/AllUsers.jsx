@@ -21,7 +21,7 @@ const AllUsers = () => {
         } catch (error) {
             console.error(error.response.data.message || 'Server error');
             toast.error(error.response.data.message || 'Server error');
-            console.log(error);
+        
         }
     }
 

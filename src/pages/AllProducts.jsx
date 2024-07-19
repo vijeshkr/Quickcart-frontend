@@ -11,7 +11,6 @@ const AllProducts = () => {
       
     const res = await makeRequest.get('/get-product')
 
-    // console.log("product data",res)
 
     setAllProduct(res?.data?.data || [])
     } catch (error) {

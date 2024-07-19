@@ -73,7 +73,7 @@ const Banner = () => {
     }, [currentImage]);
   return (
     <div className='container mx-auto px-4 rounded'>
-        <div className='h-full md:h-[450px] w-full bg-slate-200 relative'>
+        <div className='h-full lg:h-[450px] w-full bg-slate-200 relative'>
             {/* Buttons for previous and newt images, visible only desktop and tablet */}
             <div className='absolute z-10 h-full w-full md:flex items-center hidden'>
                 <div className='flex justify-between w-full text-2xl'>
@@ -88,7 +88,7 @@ const Banner = () => {
             </div>
 
             {/* Desktop banner carousel */}
-            <div className='hidden md:flex h-full w-full overflow-hidden'>
+            <div className='hidden lg:flex h-full w-full overflow-hidden'>
                 {
                     desktopImages.map((imageUrl, index) => (
                         <div className='w-full h-full min-w-full transition-all' key={index} style={{transform : `translateX(-${currentImage * 100}%)`}}>
@@ -99,7 +99,7 @@ const Banner = () => {
             </div>
 
             {/* Mobile banner */}
-            <div className='flex h-full w-full overflow-hidden md:hidden'>
+            <div className='flex h-full w-full overflow-hidden lg:hidden'>
                 {
                     mobileImages.map((imageURl,index)=>{
                         return(

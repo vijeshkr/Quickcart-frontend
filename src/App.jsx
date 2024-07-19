@@ -12,7 +12,7 @@ function App() {
   return (
     <>
         <UserProvider>
-        <ToastContainer />
+        <ToastContainer position="top-center" />
         <Navbar />
         <main>
           <Outlet />

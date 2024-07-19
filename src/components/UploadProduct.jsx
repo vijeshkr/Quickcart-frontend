@@ -58,7 +58,6 @@ const UploadProduct = ({
             // Submit product data with image URLs
             const productData = { ...data, productImage: productImagesUrls };
             const productRes = await makeRequest.post('/products', productData);
-            console.log('Product created:', productRes.data);
 
             // Refresh data and close modal
             fetchdata();
@@ -149,7 +148,7 @@ const UploadProduct = ({
                                             }}
                                         />
                                         <div
-                                            className='absolute bottom-0 right-0 p-1 text-white bg-red-600 rounded-full hidden group-hover:block cursor-pointer'
+                                            className='absolute bottom-0 right-0 p-1 text-white bg-primaryColor rounded-full hidden group-hover:block cursor-pointer'
                                             onClick={() => handleDeleteProductImage(index)}
                                         >
                                             <MdDelete />
@@ -158,7 +157,7 @@ const UploadProduct = ({
                                 ))}
                             </div>
                         ) : (
-                            <p className='text-red-600 text-xs'>*Please upload product image</p>
+                            <p className='text-primaryColor text-xs'>*Please upload product image</p>
                         )}
                     </div>
 

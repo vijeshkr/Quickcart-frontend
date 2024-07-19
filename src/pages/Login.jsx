@@ -37,7 +37,6 @@ export const Login = () => {
         e.preventDefault();
         try {
             const res = await makeRequest.post('/login',data);
-            console.log(res.data.message);
             toast.success(res.data.message);
             // Set data in the context
             await fetchUserDetails();
@@ -52,7 +51,6 @@ export const Login = () => {
         } catch (error) {
             console.error(error.response.data.message || 'Login failed');
             toast.error(error.response.data.message || 'Login failed');
-            console.log(error)
         }
     }
 
