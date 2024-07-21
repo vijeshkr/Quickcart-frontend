@@ -41,6 +41,7 @@ export const AdminPanel = () => {
                 <nav className='grid p-4'>
                     <Link to={''} className='px-2 py-1 hover:bg-primaryColor hover:text-white' >All Users</Link>
                     <Link to={'all-products'} className='px-2 py-1 hover:bg-primaryColor hover:text-white'>All Products</Link>
+                    <Link to={'admin-orders'} className='px-2 py-1 hover:bg-primaryColor hover:text-white'>All Orders</Link>
                 </nav>
             </div>     
         </aside>

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import displayINRCurrency from '../helpers/displayCurrency';
 import UserContext from '../context';
 import addToCart from '../helpers/addToCart';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const VerticalProductCard = ({ category, heading }) => {
 
@@ -83,7 +84,7 @@ const VerticalProductCard = ({ category, heading }) => {
                             return (
                                 <Link to={`/product/${product?._id}`} key={index} className='w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-sm shadow '>
                                     <div className="bg-slate-50 h-48 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center">
-                                        <img src={`http://localhost:3500${product?.productImage[0]}`} className='object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply' />
+                                        <img src={`${backendUrl}${product?.productImage[0]}`} className='object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply' />
                                     </div>
 
                                     <div className="p-4 grid gap-3">

@@ -97,7 +97,7 @@ const Navbar = () => {
                     {/* <div className='text-2xl cursor-pointer'>
                         <CiHeart />
                     </div> */}
-                    <div className='text-2xl cursor-pointer relative'>
+                    {userDetails && <div className='text-2xl cursor-pointer relative'>
                         <Link to={'/cart'}>
                             <span><CiShoppingCart /></span>
                             {
@@ -105,13 +105,16 @@ const Navbar = () => {
                               <div className='text-xs bg-primaryColor text-white p-1 w-5 flex justify-center items-center rounded-full font-semibold absolute -bottom-3 -right-3'>{cartProductCount}</div>
                             }
                         </Link>
-                    </div>
+                    </div>}
                     <div onClick={handleToggle} className='text-2xl cursor-pointer relative'>
-                        <div>
+                        {userDetails && <div>
                             <CiUser />
-                        </div>
+                        </div>}
                         {showMyProfile && <div className='absolute top-9 -left-8 w-28 text-sm bg-white shadow-md'>
                             <div className='hover:bg-gray-100 px-3 py-2'>My profile</div>
+                            <Link to={'/my-orders'}>
+                            <div className='hover:bg-gray-100 px-3 py-2'>My orders</div>
+                            </Link>
                             {userDetails?.role === ROLE.ADMIN && <Link to={'/admin'}><div className='hover:bg-gray-100 px-3 py-2 md:block hidden'>Admin Panel</div></Link>}
                         </div>
                         }

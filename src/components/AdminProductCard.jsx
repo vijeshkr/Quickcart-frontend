@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { MdModeEditOutline } from "react-icons/md";
 import displayINRCurrency from '../helpers/displayCurrency';
 import AdminEditProduct from './AdminEditProduct';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 
 const AdminProductCard = ({
@@ -14,7 +15,7 @@ const AdminProductCard = ({
     <div className='bg-slate-50 p-2 rounded '>
       <div className='w-40'>
         <div className='h-32 flex justify-center items-center'>
-          <img src={`http://localhost:3500${data?.productImage[0]}`} className='mx-auto object-cover h-full' />
+          <img src={`${backendUrl}${data?.productImage[0]}`} className='mx-auto object-cover h-full' />
         </div>
         <h1 className='text-ellipsis line-clamp-2'>{data.productName}</h1>
 

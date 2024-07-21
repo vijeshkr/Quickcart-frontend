@@ -7,6 +7,7 @@ import displayINRCurrency from '../helpers/displayCurrency';
 import UserContext from '../context/index';
 import addToCart from '../helpers/addToCart';
 import VerticalProductCard from '../components/VerticalProductCard';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const ProductDetails = () => {
 
@@ -98,7 +99,7 @@ const ProductDetails = () => {
                 {/* Product image */}
                 <div className='h-96 flex flex-col lg:flex-row-reverse gap-4'>
                     <div className='h-[300px] w-[300px] lg:h-96 lg:w-96 bg-slate-200 relative p-2'>
-                        <img src={`http://localhost:3500${activeImage}`} onMouseMove={handleZoomImage} onMouseLeave={handleLeaveImageZoom} className='h-full w-full object-scale-down mix-blend-multiply' />
+                        <img src={`${backendUrl}${activeImage}`} onMouseMove={handleZoomImage} onMouseLeave={handleLeaveImageZoom} className='h-full w-full object-scale-down mix-blend-multiply' />
                         {/* Zoom */}
                         {
                             zoomImage && (
@@ -106,7 +107,7 @@ const ProductDetails = () => {
                                     <div
                                         className='w-full h-full min-h-[400px] min-w-[500px] mix-blend-multiply scale-150'
                                         style={{
-                                            background: `url(http://localhost:3500${activeImage})`,
+                                            background: `url(${backendUrl}${activeImage})`,
                                             backgroundRepeat: 'no-repeat',
                                             backgroundPosition: `${zoomImageCordinate.x * 100}% ${zoomImageCordinate.y * 100}% `
 
@@ -139,7 +140,7 @@ const ProductDetails = () => {
                                         data?.productImage?.map((imgUrl, index) => {
                                             return (
                                                 <div className='h-20 w-20 bg-slate-200 rounded p-1' key={index}>
-                                                    <img src={`http://localhost:3500${imgUrl}`} onClick={() => handleMouseEnterProduct(imgUrl)} className='w-full h-full object-scale-down mix-blend-multiply cursor-pointer' />
+                                                    <img src={`${backendUrl}${imgUrl}`} onClick={() => handleMouseEnterProduct(imgUrl)} className='w-full h-full object-scale-down mix-blend-multiply cursor-pointer' />
                                                 </div>
                                             )
                                         })

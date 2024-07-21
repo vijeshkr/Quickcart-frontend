@@ -3,6 +3,8 @@ import makeRequest from '../axios';
 import { MdDelete } from "react-icons/md";
 import displayINRCurrency from '../helpers/displayCurrency';
 import UserContext from '../context';
+import { loadStripe } from '@stripe/stripe-js';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Cart = () => {
     const [data, setData] = useState([]);
@@ -22,14 +24,14 @@ const Cart = () => {
     }
 
     const handleLoading = async () => {
-        await fetchData()
+        await fetchData();
     }
 
     useEffect(() => {
         setLoading(true)
         handleLoading()
         setLoading(false)
-    }, []);
+    }, [data]);
 
     const increaseQty = async (id,qty) => {
         const response = await makeRequest.post('/update-cart',{
@@ -69,8 +71,25 @@ const Cart = () => {
         }
     }
 
-    const totalQty = data.reduce((previousValue,currentValue)=> previousValue + currentValue.quantity,0)
-    const totalPrice = data.reduce((preve,curr)=> preve + (curr.quantity * curr?.productId?.sellingPrice) ,0)
+    const totalQty = data.reduce((previousValue,currentValue)=> previousValue + currentValue.quantity,0);
+    const totalPrice = data.reduce((preve,curr)=> preve + (curr.quantity * curr?.productId?.sellingPrice) ,0);
+
+
+    // Payment integration handle checkout section
+    const handleCheckout = async () => {
+        try {
+            const response = await makeRequest.post('/checkout', {
+                cartItems: data,
+            });
+            const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+            
+            const stripe = await stripePromise;
+            await stripe.redirectToCheckout({ sessionId: response.data.id });
+
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
     return (
         <div className='container mx-auto'>
         
@@ -99,7 +118,7 @@ const Cart = () => {
                            return(
                             <div key={index} className='w-full bg-white h-32 my-2 border border-slate-300  rounded grid grid-cols-[128px,1fr]'>
                                 <div className='w-32 h-32 bg-slate-200'>
-                                    <img src={`http://localhost:3500${product?.productId?.productImage[0]}`} className='w-full h-full object-scale-down mix-blend-multiply' />
+                                    <img src={`${backendUrl}${product?.productId?.productImage[0]}`} className='w-full h-full object-scale-down mix-blend-multiply' />
                                 </div>
                                 <div className='px-4 py-2 relative'>
                                     {/**delete product */}
@@ -134,7 +153,7 @@ const Cart = () => {
                             <div className='h-36 bg-slate-200 border border-slate-300 animate-pulse'>
                                 
                             </div>
-                            ) : (
+                            ) : ( data[0] &&
                                 <div className='h-36 bg-white'>
                                     <h2 className='text-white bg-primaryColor px-4 py-1'>Summary</h2>
                                     <div className='flex items-center justify-between px-4 gap-2 font-medium text-lg text-slate-600'>
@@ -147,7 +166,7 @@ const Cart = () => {
                                         <p>{displayINRCurrency(totalPrice)}</p>    
                                     </div>
 
-                                    <button className='bg-blue-600 p-2 text-white w-full mt-2'>Payment</button>
+                                    <button onClick={handleCheckout} className='bg-blue-600 p-2 text-white w-full mt-2'>Payment</button>
 
                                 </div>
                             )

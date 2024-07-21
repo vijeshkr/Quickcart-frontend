@@ -5,6 +5,7 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import DisplayImage from './DisplayImage';
 import { MdDelete } from "react-icons/md";
 import makeRequest from '../axios';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const AdminEditProduct = ({
     onClose,
@@ -88,7 +89,7 @@ const AdminEditProduct = ({
       // Delete product
       const handleDeleteProduct = async (productId) => {
         try {
-            await makeRequest.delete(`http://localhost:3500/api/products/${productId}`);
+            await makeRequest.delete(`/products/${productId}`);
             // console.log('Product deleted:', res.data);
             
             fetchdata(); // Refresh product list after deletion
@@ -167,14 +168,14 @@ const AdminEditProduct = ({
                                 {data.productImage.map((el, index) => (
                                     <div className='relative group' key={index}>
                                         <img
-                                            src={`http://localhost:3500${data?.productImage[index]}`}
+                                            src={`${backendUrl}${data?.productImage[index]}`}
                                             alt='product'
                                             width={80}
                                             height={80}
                                             className='bg-slate-100 border cursor-pointer'
                                             onClick={() => {
                                                 setOpenFullScreenImage(true);
-                                                setFullScreenImage(`http://localhost:3500${data?.productImage[index]}`);
+                                                setFullScreenImage(`${backendUrl}${data?.productImage[index]}`);
                                             }}
                                         />
                                         <div
