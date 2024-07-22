@@ -64,7 +64,8 @@ export const Login = () => {
     return (
         <div id='login' className='bg-bgRose h-screen'>
             <div className='mx-auto container h-full p-10'>
-                <div className='bg-white h-4/6 px-10 py-14 max-w-sm mx-auto'>
+                <div className='bg-white px-10 py-14 max-w-sm mx-auto'>
+                    <div className='py-5'>
                     <h1 className='text-xl font-semibold py-5 text-gray-600'>Login to your account</h1>
                     <form onSubmit={handleSubmit} action="">
                         <div className='pb-5'>
@@ -101,6 +102,7 @@ export const Login = () => {
                             <Link to={'/sign-up'}><span className='cursor-pointer text-primaryColor font-semibold'>Sign up</span></Link>
                         </div>
                     </form>
+                    </div>
                 </div>
             </div>
         </div>
