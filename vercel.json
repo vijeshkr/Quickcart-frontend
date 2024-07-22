@@ -1,32 +1,15 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "index.html",
-        "use": "@vercel/static"
-      },
-      {
-        "src": "vite.config.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/"
-      }
-    ],
-    "functions": {
-      "api/**/*.js": {
-        "maxDuration": 10
-      }
-    },
-    "public": "public",
-    "ignore": [
-      ".gitignore",
-      "node_modules",
-      "README.md",
-      "package-lock.json"
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
