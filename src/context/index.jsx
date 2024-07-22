@@ -14,7 +14,6 @@ export const UserProvider = ({ children }) => {
       setUserDetails(res.data.data);
     } catch (error) {
       console.error('Failed to fetch user details ', error);
-      alert('Failed to fetch user details. Please try again later.');
     }
   }
 
